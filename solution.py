@@ -16,6 +16,10 @@ def get_video_id(url):
     else:
         return None
 
+print("=" * 50)
+print("YouTube Video Summarizer")
+print("=" * 50)
+
 video_url = input("Enter URL: \n")
 video_id = get_video_id(video_url)
 
@@ -61,9 +65,18 @@ llm = ChatGoogleGenerativeAI(
 
 llm_chain = system_prompt | llm
 
+print("=" * 50)
+print("Requesting AI to summarize the video...")
+print("=" * 50)
+
 response = llm_chain.invoke({
     "transcript_text": combined_transcript,
     "video_url": video_url
 })
 
+print("Received response from AI successfully.")
+
+print("=" * 50)
+print("Summary:")
+print("=" * 50)
 print(response.content)
