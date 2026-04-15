@@ -38,6 +38,8 @@ gemini_api_key = os.getenv("GOOGLE_API_KEY")
 system_prompt = ChatPromptTemplate.from_template("""
 Summarize this YouTube video transcript in a clear, 
 structured format.
+                                                 
+Video URL: {video_url}
 
 Transcript:
 {transcript_text}
@@ -60,7 +62,8 @@ llm = ChatGoogleGenerativeAI(
 llm_chain = system_prompt | llm
 
 response = llm_chain.invoke({
-    "transcript_text": combined_transcript
+    "transcript_text": combined_transcript,
+    "video_url": video_url
 })
 
 print(response.content)
